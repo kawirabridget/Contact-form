@@ -1,0 +1,83 @@
+
+<div class="form-container">
+  <div class="contact-form">
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" (keydown.enter)="onSubmit()" fxLayout="column" fxLayoutGap="1rem" fxLayoutAlign="center center">
+        <div class="heading">
+            <h3>Contact Us</h3>
+        </div>
+      <!-- Name Fields -->
+      <div class="name-fields">
+        <div class="form-field" >
+          <mat-label>First Name <span class="required">*</span></mat-label>
+          <mat-form-field appearance="outline" class="full-width">
+            <input matInput formControlName="firstName" required />
+            <mat-error
+              *ngIf="contactForm.controls['firstName'].hasError('required')"
+            >
+              First Name is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-field">
+            <mat-label>Last Name <span class="required">*</span></mat-label>
+          <mat-form-field appearance="outline" class="full-width">
+        <input matInput formControlName="lastName" required />
+            <mat-error
+              *ngIf="contactForm.controls['lastName'].hasError('required')"
+            >
+              Last Name is required
+            </mat-error></mat-form-field
+          >
+        </div>
+          </div>
+      <!-- Email Field -->
+      <div class="form-field">
+        <mat-label>Email Adress <span class="required">*</span></mat-label>
+        <mat-form-field appearance="outline" class="full-width">
+          <input  matInput formControlName="emailAddress" required />
+          <mat-error
+            *ngIf="contactForm.controls['emailAddress'].hasError('required')"
+          >
+            Email Address is required.
+          </mat-error>
+          <mat-error *ngIf="contactForm.controls['emailAddress'].hasError('email') && !contactForm.controls['emailAddress'].hasError('required')">
+          please enter a valid email address
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <!-- Query Type -->
+       <div class="form-field">
+        <label class="form-label">Query Type <span class="required">*</span>
+            <mat-radio-group  class="radio-group" >
+            <mat-radio-button value="generalEnquiry">General Equiry</mat-radio-button>
+            <mat-radio-button value="serviceRequest">Service Request</mat-radio-button>
+        </mat-radio-group>
+        </label>
+          </div>
+          <!-- Message Field -->
+           <div class="form-field">
+        <mat-label>Message <span class="required">*</span></mat-label>
+        <mat-form-field>
+            <textarea matInput placeholder="Enter your Message" rows="4" ></textarea>
+        </mat-form-field>
+    </div>
+    <!-- consent-field-->
+     <div class="form-field">
+        <mat-checkbox formControlName="consent">I agree to the terms and conditions</mat-checkbox>
+        <mat-error *ngIf="contactForm.controls['consent'].hasError('required')">
+            You must agree to the terms and conditions.
+        </mat-error>
+        <div class="submit-btn">
+            <button mat-button type="submit" [disabled]="contactForm.invalid" (Click)="onSubmit()">Submit</button>
+        </div>
+       
+        <button mat-button type="reset">Reset</button>
+
+        <div *ngIf="formSuccess" aria-live="polite" fxFlex="100%" class="success-message">
+          Form submitted successfully!
+        </div>
+     </div>
+    </form>
+  </div> 
+</div>
